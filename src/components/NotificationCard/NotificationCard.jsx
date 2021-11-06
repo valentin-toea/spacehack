@@ -5,7 +5,7 @@ import React from 'react';
 import './NotificationCard.scss'
 const NotificationCard = () => {
     return (
-        <Card className="notification-wrapper">
+        <Card className="notification-wrapper" shadow="md" radius="md">
             <Group className="notification-container">
                 <Text color="green" size="lg" className="notification"><FiCheckCircle style={{color:"green", marginRight: "5px"}}/>You're doing pretty well on Facebook</Text>
                 <Text color="red" size="lg" className="notification"><FiAlertCircle style={{color:"red", marginRight: "5px"}}/>Your Instagram reach is on a downfall</Text>

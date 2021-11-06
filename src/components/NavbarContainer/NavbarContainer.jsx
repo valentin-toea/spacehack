@@ -27,7 +27,7 @@ const NavbarContainer = () => {
         <NavbarButton
           icon={<BarChartIcon style={{ height: 20, width: 20 }} />}
           text="Performance"
-          to="/2"
+          to="/performance"
         />
         <NavbarButton
           icon={<RulerSquareIcon style={{ height: 20, width: 20 }} />}

@@ -2,10 +2,7 @@ import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { changePlatform } from "../../redux/platformSlice";
 import {
-  AppShell,
-  Navbar,
   Header,
-  ThemeIcon,
   Title,
   Select,
   Autocomplete,

@@ -74,8 +74,8 @@ const HomePage = () => {
   };
 
   return (
-    <div className="home-page">
-      <div style={{ padding: "0 1rem", display: "flex" }}>
+    <div className="home-page" style={{ padding: "0 1rem" }}>
+      <div style={{ display: "flex" }}>
         {postStats &&
           stats.map((obj, index) => (
             <Card
@@ -116,9 +116,9 @@ const HomePage = () => {
             </Card>
           ))}
       </div>
-      <div style={{margin: '20px 0'}}>
+      <div style={{ margin: "20px 0" }}>
         <span style={{ fontSize: "18px" }}>
-          Your last post was <b style={{fontSize: "22px"}}>2 days ago</b>
+          Your last post was <b style={{ fontSize: "22px" }}>2 days ago</b>
         </span>
       </div>
     </div>

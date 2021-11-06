@@ -10,6 +10,7 @@ import { AppShell } from "@mantine/core";
 import NavbarContainer from "./components/NavbarContainer/NavbarContainer";
 import HeaderContainer from "./components/HeaderContainer/HeaderContainer";
 import { colors } from "./config/config";
+import PerformancePage from "./pages/PerformancePage/PerformancePage";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -35,6 +36,7 @@ const App = () => {
         <Routes>
           <Route exact path="/" element={<HomePage />} />
           <Route path="/post-analyze" element={<RecPage />} />
+          <Route path="/performance" element={<PerformancePage />} />
         </Routes>
       </AppShell>
     </Router>

@@ -6,6 +6,8 @@ import { useSelector } from "react-redux";
 import { Card, ThemeIcon } from "@mantine/core";
 import { colors } from "../../config/config";
 import { FiThumbsUp, FiFileText, FiMessageSquare } from "react-icons/fi";
+import TopPostCard from "../../components/TopPostCard/TopPostCard";
+import NotificationCard from "../../components/NotificationCard/NotificationCard";
 
 const calcSumTotal = (obj) => {
   return [
@@ -116,11 +118,16 @@ const HomePage = () => {
             </Card>
           ))}
       </div>
-      <div style={{ margin: "20px 0" }}>
+      {
+        selectedPlatform === "All Socials" && <NotificationCard/>
+      }
+      <div style={{margin: '20px 2rem'}}>
         <span style={{ fontSize: "18px" }}>
           Your last post was <b style={{ fontSize: "22px" }}>2 days ago</b>
         </span>
       </div>
+
+      <TopPostCard/>
     </div>
   );
 };

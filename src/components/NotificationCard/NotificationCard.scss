@@ -1,0 +1,20 @@
+.notification-wrapper{
+    margin: 10px 2rem;
+    
+    .notification-container{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        
+        .notification{
+            width: 100%;
+            display: flex;
+            align-items: center;
+            background-color: rgb(255, 255, 255);
+            padding: 10px;
+            border-radius: 5px;
+            
+        }
+
+    }
+}

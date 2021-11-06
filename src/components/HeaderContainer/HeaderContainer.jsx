@@ -21,13 +21,14 @@ const HeaderContainer = () => {
   return (
     <Header className="header">
       <div className="header-container">
-        <Title order={3}>Yessir </Title>
+        <Title order={3}>Profile Statistics</Title>
         <div className="header-cell">
           <Select
             className="select-platform"
             data={selectData}
             value={selectedPlatform}
             onChange={(e) => dispatch(changePlatform(e))}
+            style={{marginRight: 10, width: 150}}
           />
           <Autocomplete
             placeholder="Search by tag"

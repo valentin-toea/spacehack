@@ -13,7 +13,7 @@ const HeaderContainer = () => {
   const selectedPlatform = useSelector((state) => state.platform.value);
   const dispatch = useDispatch();
 
-  let selectData = ["Facebook", "Instagram", "Twitter", "Linkedin"];
+  let selectData = ["All", "Facebook", "Instagram", "Twitter", "Linkedin"];
 
   return (
     <Header className="header">
@@ -25,7 +25,7 @@ const HeaderContainer = () => {
             data={selectData}
             value={selectedPlatform}
             onChange={(e) => dispatch(changePlatform(e))}
-            style={{marginRight: 10, width: 150}}
+            style={{ marginRight: 10, width: 150 }}
           />
           <Autocomplete
             placeholder="Search by tag"

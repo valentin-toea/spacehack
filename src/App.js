@@ -6,12 +6,21 @@ import RecPage from "./pages/RecPage/RecPage";
 import { AppShell } from "@mantine/core";
 import NavbarContainer from "./components/NavbarContainer/NavbarContainer";
 import HeaderContainer from "./components/HeaderContainer/HeaderContainer";
+import { colors } from "./config/config";
 
 const App = () => {
   return (
     <Provider store={store}>
       <Router>
-        <AppShell padding="md" navbar={<NavbarContainer />}>
+        <AppShell
+          padding="md"
+          navbar={<NavbarContainer />}
+          styles={(theme) => ({
+            main: {
+              backgroundColor: colors.whiteblue,
+            },
+          })}
+        >
           <HeaderContainer />
           <Routes>
             <Route exact path="/" element={<HomePage />} />

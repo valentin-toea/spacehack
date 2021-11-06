@@ -1,0 +1,28 @@
+.unstyledButton {
+  padding: 10px;
+  width: 100%;
+  border-radius: 15px;
+}
+
+.unstyledButtonSelected {
+  padding: 10px;
+  width: 100%;
+  border-radius: 15px;
+  background-color: #5765A6;
+}
+
+.unstyledButtonText {
+  font-size: 18px;
+  line-height: 1.55;
+}
+
+.unstyledButtonTextSelected {
+  color: white;
+  font-size: 18px;
+  line-height: 1.55;
+  font-weight: bold;
+}
+
+.unstyledButton:hover {
+  background-color: #F5F8FE;
+}

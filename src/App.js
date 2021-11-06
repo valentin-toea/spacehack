@@ -5,6 +5,11 @@ import axios from "axios";
 import { MAIN_URL } from "./config/config";
 import { useDispatch } from "react-redux";
 import { updatePostStat } from "./redux/postStatSlice";
+import RecPage from "./pages/RecPage/RecPage";
+import { AppShell } from "@mantine/core";
+import NavbarContainer from "./components/NavbarContainer/NavbarContainer";
+import HeaderContainer from "./components/HeaderContainer/HeaderContainer";
+import { colors } from "./config/config";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -17,9 +22,21 @@ const App = () => {
 
   return (
     <Router>
-      <Routes>
-        <Route exact path="/" element={<HomePage />} />
-      </Routes>
+      <AppShell
+        padding="md"
+        navbar={<NavbarContainer />}
+        styles={(theme) => ({
+          main: {
+            backgroundColor: colors.whiteblue,
+          },
+        })}
+      >
+        <HeaderContainer />
+        <Routes>
+          <Route exact path="/" element={<HomePage />} />
+          <Route path="/rec" element={<RecPage />} />
+        </Routes>
+      </AppShell>
     </Router>
   );
 };

@@ -34,7 +34,7 @@ const App = () => {
         <HeaderContainer />
         <Routes>
           <Route exact path="/" element={<HomePage />} />
-          <Route path="/rec" element={<RecPage />} />
+          <Route path="/post-analyze" element={<RecPage />} />
         </Routes>
       </AppShell>
     </Router>

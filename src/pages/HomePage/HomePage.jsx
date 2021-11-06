@@ -51,7 +51,7 @@ const HomePage = () => {
   let stats = [];
 
   if (postStats) {
-    if (selectedPlatform === "All") stats = calcSumTotal(postStats);
+    if (selectedPlatform === "All Socials") stats = calcSumTotal(postStats);
     else {
       stats = calcSum(postStats[selectedPlatform.toLowerCase()]);
     }
@@ -74,46 +74,53 @@ const HomePage = () => {
   };
 
   return (
-    <div style={{ padding: "0 1rem", display: "flex" }}>
-      {postStats &&
-        stats.map((obj, index) => (
-          <Card
-            key={index}
-            radius="md"
-            shadow="xs"
-            padding="lg"
-            style={{
-              margin: "0 1rem",
-              display: "flex",
-              width: "100%",
-              alignItems: "center",
-            }}
-          >
-            {setIcon(index)}
-            <div
+    <div className="home-page">
+      <div style={{ padding: "0 1rem", display: "flex" }}>
+        {postStats &&
+          stats.map((obj, index) => (
+            <Card
+              key={index}
+              radius="md"
+              shadow="xs"
+              padding="lg"
               style={{
+                margin: "0 1rem",
                 display: "flex",
-                flexDirection: "column",
-                marginLeft: "15px",
+                width: "100%",
+                alignItems: "center",
               }}
             >
-              <span
-                style={{ color: colors.lightmarine, marginBottom: "0.2rem" }}
-              >
-                {obj.name}
-              </span>
-              <span
+              {setIcon(index)}
+              <div
                 style={{
-                  color: colors.darkblue,
-                  fontSize: "20px",
-                  fontWeight: "bold",
+                  display: "flex",
+                  flexDirection: "column",
+                  marginLeft: "15px",
                 }}
               >
-                {obj.value}
-              </span>
-            </div>
-          </Card>
-        ))}
+                <span
+                  style={{ color: colors.lightmarine, marginBottom: "0.2rem" }}
+                >
+                  {obj.name}
+                </span>
+                <span
+                  style={{
+                    color: colors.darkmarine,
+                    fontSize: "20px",
+                    fontWeight: "bold",
+                  }}
+                >
+                  {obj.value}
+                </span>
+              </div>
+            </Card>
+          ))}
+      </div>
+      <div style={{margin: '20px 0'}}>
+        <span style={{ fontSize: "18px" }}>
+          Your last post was <b style={{fontSize: "22px"}}>2 days ago</b>
+        </span>
+      </div>
     </div>
   );
 };

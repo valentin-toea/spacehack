@@ -1,0 +1,29 @@
+.rec-wrapper{
+    display: flex;
+    justify-content: center;
+    .rec-container{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        max-width: 900px;
+        min-width: 900px;
+        padding: 15px;
+        .field-container{
+            display: flex;
+            flex-direction: column;
+            width:45%;
+            .field:not(:last-child){
+                margin-bottom: 10px;
+            }
+        }
+        .card{
+            width: 50%;
+            border-radius: 15px;
+            background-color: whitesmoke;
+            .section{
+                padding: 15px;
+            }
+        }
+
+    }
+}

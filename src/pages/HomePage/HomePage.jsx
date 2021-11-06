@@ -1,22 +1,14 @@
 import React from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { changePlatform } from "../../redux/platformSlice";
+import { AppShell } from "@mantine/core";
+import NavbarContainer from "../../components/NavbarContainer/NavbarContainer";
+import HeaderContainer from "../../components/HeaderContainer/HeaderContainer";
+import "./HomePage.scss";
 
 const HomePage = () => {
-  const selectedPlatform = useSelector((state) => state.platform.value);
-  const dispatch = useDispatch();
-
   return (
-    <div>
-      <select
-        onChange={(e) => dispatch(changePlatform(e.target.value))}
-        value={selectedPlatform}
-      >
-        <option value="Facebook">Facebook</option>
-        <option value="Instagram">Instagram</option>
-        <option value="Twitter">Twitter</option>
-      </select>
-    </div>
+    <AppShell padding="md" navbar={<NavbarContainer />}>
+      <HeaderContainer />
+    </AppShell>
   );
 };
 

@@ -8,4 +8,4 @@ export const colors = {
   darkmarine: "#2E3750",
 };
 
-export const MAIN_URL = "http://4108-86-121-140-13.ngrok.io/";
+export const MAIN_URL = "http://29b9-86-121-140-13.ngrok.io/";

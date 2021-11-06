@@ -31,8 +31,8 @@ const NavbarContainer = () => {
         />
         <NavbarButton
           icon={<RulerSquareIcon style={{ height: 20, width: 20 }} />}
-          text="Post Planner"
-          to="/3"
+          text="Post Analyze"
+          to="/post-analyze"
         />
       </Navbar.Section>
       <Navbar.Section className="user">

@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  value: "All",
+  value: "All Socials",
 };
 
 export const platformSlice = createSlice({

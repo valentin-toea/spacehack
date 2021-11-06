@@ -121,7 +121,7 @@ const HomePage = () => {
       {
         selectedPlatform === "All Socials" && <NotificationCard/>
       }
-      <div style={{margin: '20px 2rem'}}>
+      <div style={{margin: '20px 1rem'}}>
         <span style={{ fontSize: "18px" }}>
           Your last post was <b style={{ fontSize: "22px" }}>2 days ago</b>
         </span>

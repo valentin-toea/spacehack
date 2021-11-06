@@ -23,7 +23,7 @@ const HomePage = () => {
                     <Title order={3}>Yessir </Title>
                     <div className="header-cell">
                         <Select
-                            placeholder="Pick one"
+                            
                             data={[{ value: 'react', label: 'React' },
                             { value: 'ng', label: 'Angular' },
                             { value: 'svelte', label: 'Svelte' },

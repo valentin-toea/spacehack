@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  value: "Facebook",
+  value: "All",
 };
 
 export const platformSlice = createSlice({

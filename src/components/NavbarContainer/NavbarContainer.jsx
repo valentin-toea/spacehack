@@ -3,8 +3,10 @@ import { Avatar, Navbar, ThemeIcon, Title } from "@mantine/core";
 import {
   BarChartIcon,
   CalendarIcon,
+  DashboardIcon,
   GearIcon,
   HomeIcon,
+  RulerSquareIcon,
 } from "@radix-ui/react-icons";
 import NavbarButton from "../NavbarButton/NavbarButton";
 import "./NavbarContainer.scss";
@@ -18,23 +20,18 @@ const NavbarContainer = () => {
       </Navbar.Section>
       <Navbar.Section grow mt="lg">
         <NavbarButton
-          icon={<HomeIcon style={{ height: 20, width: 20 }} />}
-          text="Home"
+          icon={<DashboardIcon style={{ height: 20, width: 20 }} />}
+          text="Dashboard"
           to="/"
         />
         <NavbarButton
-          icon={<CalendarIcon style={{ height: 20, width: 20 }} />}
-          text="Calendar"
-          to="/1"
-        />
-        <NavbarButton
           icon={<BarChartIcon style={{ height: 20, width: 20 }} />}
-          text="Attendance"
+          text="Performance"
           to="/2"
         />
         <NavbarButton
-          icon={<GearIcon style={{ height: 20, width: 20 }} />}
-          text="Settings"
+          icon={<RulerSquareIcon style={{ height: 20, width: 20 }} />}
+          text="Post Planner"
           to="/3"
         />
       </Navbar.Section>

@@ -6,6 +6,7 @@ import { useSelector } from "react-redux";
 import { Card, ThemeIcon } from "@mantine/core";
 import { colors } from "../../config/config";
 import { FiThumbsUp, FiFileText, FiMessageSquare } from "react-icons/fi";
+import TopPostCard from "../../components/TopPostCard/TopPostCard";
 
 const calcSumTotal = (obj) => {
   return [
@@ -121,6 +122,8 @@ const HomePage = () => {
           Your last post was <b style={{fontSize: "22px"}}>2 days ago</b>
         </span>
       </div>
+
+      <TopPostCard/>
     </div>
   );
 };

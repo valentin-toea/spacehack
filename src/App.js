@@ -11,6 +11,7 @@ import NavbarContainer from "./components/NavbarContainer/NavbarContainer";
 import HeaderContainer from "./components/HeaderContainer/HeaderContainer";
 import { colors } from "./config/config";
 import PerformancePage from "./pages/PerformancePage/PerformancePage";
+import PostsPage from "./pages/Posts/PostsPage";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -37,6 +38,7 @@ const App = () => {
           <Route exact path="/" element={<HomePage />} />
           <Route path="/post-analyze" element={<RecPage />} />
           <Route path="/performance" element={<PerformancePage />} />
+          <Route path="/posts" element={<PostsPage />} />
         </Routes>
       </AppShell>
     </Router>

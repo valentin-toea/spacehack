@@ -1,13 +1,13 @@
 import React from "react";
-import BarGraph from "../../components/BarGraph/BarGraph";
-import PieGraph from "../../components/PieGraph/PieGraph";
+import axios from "axios";
 import "./HomePage.scss";
 import { useSelector } from "react-redux";
 import { Card, ThemeIcon } from "@mantine/core";
-import { colors } from "../../config/config";
+import { colors, MAIN_URL } from "../../config/config";
 import { FiThumbsUp, FiFileText, FiMessageSquare } from "react-icons/fi";
 import TopPostCard from "../../components/TopPostCard/TopPostCard";
 import NotificationCard from "../../components/NotificationCard/NotificationCard";
+import { handlePostsData } from "./HomePage.config";
 
 const calcSumTotal = (obj) => {
   return [
@@ -50,6 +50,9 @@ const HomePage = () => {
   const selectedPlatform = useSelector((state) => state.platform.value);
   const postStats = useSelector((state) => state.postStat.value);
 
+  const [popularPosts, setPopularPosts] = React.useState([]);
+  const [recentPosts, setRecentPosts] = React.useState([]);
+
   let stats = [];
 
   if (postStats) {
@@ -59,6 +62,22 @@ const HomePage = () => {
     }
   }
 
+  React.useEffect(() => {
+    selectedPlatform &&
+      axios.get(MAIN_URL + "most_popular").then((response) => {
+        const arr = handlePostsData(response.data, selectedPlatform);
+        arr && setPopularPosts([arr[0], arr[1], arr[2]]);
+      });
+  }, [selectedPlatform]);
+
+  React.useEffect(() => {
+    selectedPlatform &&
+      axios.get(MAIN_URL + "/most_recent").then((response) => {
+        const arr = handlePostsData(response.data, selectedPlatform);
+        arr && setRecentPosts([arr[0], arr[1], arr[2]]);
+      });
+  }, [selectedPlatform]);
+  console.log(popularPosts);
   const setIcon = (index) => {
     return (
       <ThemeIcon
@@ -77,7 +96,7 @@ const HomePage = () => {
 
   return (
     <div className="home-page" style={{ padding: "0 1rem" }}>
-      <div style={{ display: "flex" }}>
+      <div style={{ display: "flex", marginBottom: "20px" }}>
         {postStats &&
           stats.map((obj, index) => (
             <Card
@@ -118,16 +137,23 @@ const HomePage = () => {
             </Card>
           ))}
       </div>
-      {
-        selectedPlatform === "All Socials" && <NotificationCard/>
-      }
-      <div style={{margin: '20px 1rem'}}>
-        <span style={{ fontSize: "18px" }}>
-          Your last post was <b style={{ fontSize: "22px" }}>2 days ago</b>
-        </span>
+      {selectedPlatform === "All Socials" && <NotificationCard />}
+      <div>
+        <h2 style={{ padding: "0 1rem" }}>Your best received posts</h2>
+        <div style={{ display: "flex", flexWrap: "wrap" }}>
+          {popularPosts.map((elem) => (
+            <TopPostCard data={elem} selectedPlatform={selectedPlatform} />
+          ))}
+        </div>
       </div>
-
-      <TopPostCard/>
+      <div>
+        <h2 style={{ padding: "0 1rem" }}>Your best most recent posts</h2>
+        <div style={{ display: "flex", flexWrap: "wrap" }}>
+          {recentPosts.map((elem) => (
+            <TopPostCard data={elem} selectedPlatform={selectedPlatform} />
+          ))}
+        </div>
+      </div>
     </div>
   );
 };

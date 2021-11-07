@@ -6,6 +6,8 @@ import {
   DashboardIcon,
   GearIcon,
   HomeIcon,
+  Pencil2Icon,
+  ReaderIcon,
   RulerSquareIcon,
 } from "@radix-ui/react-icons";
 import NavbarButton from "../NavbarButton/NavbarButton";
@@ -33,6 +35,11 @@ const NavbarContainer = () => {
           icon={<RulerSquareIcon style={{ height: 20, width: 20 }} />}
           text="Post Analyze"
           to="/post-analyze"
+        />
+        <NavbarButton
+          icon={<ReaderIcon style={{ height: 20, width: 20 }} />}
+          text="Posts"
+          to="/posts"
         />
       </Navbar.Section>
       <Navbar.Section className="user">

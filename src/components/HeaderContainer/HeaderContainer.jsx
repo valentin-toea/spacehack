@@ -76,7 +76,9 @@ const HeaderContainer = () => {
   React.useEffect(() => {
     if (location.pathname === "/") setPageName("Howdy, Hootsuite!");
     if (location.pathname === "/post-analyze")
-      setPageName("Get the most of your posts");
+      setPageName("Get The Most Of Your Future Post");
+    if (location.pathname === "/posts")
+      setPageName("Check Out Your Posts");
   }, [location.pathname]);
 
   return (

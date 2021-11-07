@@ -27,8 +27,7 @@ const PerformancePage = () => {
     >
       <BarGraph data={data} selectedPlatform={selectedPlatform} />
       <PieGraph data={data} selectedPlatform={selectedPlatform} />
-      {selectedPlatform !== "All Socials" && <RadialGraph data={data} selectedPlatform={selectedPlatform}/>}
-      
+      <RadialGraph data={data} selectedPlatform={selectedPlatform} />
     </div>
   );
 };

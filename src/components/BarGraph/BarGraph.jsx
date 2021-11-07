@@ -89,7 +89,11 @@ const BarGraph = (props) => {
   };
 
   return (
-    <Card radius="md" shadow="xs" style={{ padding: "1rem" }}>
+    <Card
+      radius="md"
+      shadow="xs"
+      style={{ padding: "1rem", marginBottom: "30px" }}
+    >
       <Text>
         Week Days Stats
         {props.selectedPlatform === "All Socials" && " Across All Platforms"}

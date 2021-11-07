@@ -1,32 +1,33 @@
- $whiteblue: #F5F8FE;
- $lightblue: #B3C2E7;
+$whiteblue: #f5f8fe;
+$lightblue: #b3c2e7;
 
-.rec-wrapper{
+.rec-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  .rec-container {
     display: flex;
-    justify-content: center;
-    .rec-container{
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        max-width: 900px;
-        width: 100%;
-        min-width: 400px;
-        padding: 15px;
-        .field-container{
-            display: flex;
-            flex-direction: column;
-            width:45%;
-            .field:not(:last-child){
-                margin-bottom: 10px;
-            }
-        }
-        .card{
-            width: 50%;
-            border-radius: 15px;
-            .section{
-                padding: 15px;
-            }
-        }
-
+    flex-direction: row;
+    justify-content: space-between;
+    max-width: 900px;
+    width: 100%;
+    min-width: 400px;
+    padding: 15px;
+    .field-container {
+      display: flex;
+      flex-direction: column;
+      width: 45%;
+      .field:not(:last-child) {
+        margin-bottom: 10px;
+      }
     }
+    .card {
+      width: 50%;
+      border-radius: 15px;
+      .section {
+        padding: 15px;
+      }
+    }
+  }
 }

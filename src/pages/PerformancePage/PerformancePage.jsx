@@ -5,6 +5,7 @@ import axios from "axios";
 import { MAIN_URL } from "../../config/config";
 import PieGraph from "../../components/PieGraph/PieGraph";
 import { Card, Text } from "@mantine/core";
+import RadialGraph from "../../components/RadialGraph/RadialGraph";
 
 const PerformancePage = () => {
   const selectedPlatform = useSelector((state) => state.platform.value);
@@ -26,6 +27,8 @@ const PerformancePage = () => {
     >
       <BarGraph data={data} selectedPlatform={selectedPlatform} />
       <PieGraph data={data} selectedPlatform={selectedPlatform} />
+      {selectedPlatform !== "All Socials" && <RadialGraph data={data} selectedPlatform={selectedPlatform}/>}
+      
     </div>
   );
 };

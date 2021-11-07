@@ -9,7 +9,7 @@ $lightblue: #b3c2e7;
   .rec-container {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: center;
     max-width: 900px;
     width: 100%;
     min-width: 400px;
@@ -24,9 +24,13 @@ $lightblue: #b3c2e7;
     }
     .card {
       width: 50%;
+      margin-left:20px;
       border-radius: 15px;
+      display: flex;
+      justify-content: center;
       .section {
         padding: 15px;
+        
       }
     }
   }

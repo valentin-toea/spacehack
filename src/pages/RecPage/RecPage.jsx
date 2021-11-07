@@ -5,6 +5,7 @@ import {
   Center,
   Chip,
   Chips,
+  SegmentedControl,
   Textarea,
   Title,
 } from "@mantine/core";
@@ -30,6 +31,7 @@ import {
   ResponsiveContainer,
 } from "recharts";
 import TagChart from "./TagChart";
+import { FiFlag } from "react-icons/fi";
 
 const gradients = [
   { from: "indigo", to: "cyan" },
@@ -80,6 +82,7 @@ const RecPage = () => {
       goodWords: [...new Set(result.positive)],
     });
   };
+    const [readable, setReadable] = useState(null);
 
   React.useEffect(() => {
     axios.get(MAIN_URL + "trendy").then((response) => setTrends(response.data));
@@ -88,7 +91,7 @@ const RecPage = () => {
   const checkTextWriting = () => {
     axios
       .post(MAIN_URL + "gob", { data: postText })
-      .then((result) => console.log(result));
+      .then((result) => { setReadable(result.data)});
   };
 
   const getTagsFromText = () => {
@@ -96,9 +99,11 @@ const RecPage = () => {
       .post(MAIN_URL + "tags", { data: postText + " " + tagsText })
       .then((result) =>
         setRecommendedTags(result.data.filter((elem) => !addon.includes(elem)))
-      );
+      )
+      .then( 
+        axios.post(MAIN_URL+ "more_tags", { data: postText + " " + tagsText })
+        .then((result) => setRecommendedTags(result.data.filter( elem => !addon.includes(elem)))));
   };
-  console.log(recommendedTags);
 
   return (
     <div className="rec-wrapper">
@@ -150,42 +155,54 @@ const RecPage = () => {
               ))}
             </Chips>
           </div>
+          <Button
+            onClick={() => {
+              analyzeSentiment();
+              checkTextWriting();
+            }}
+            style={{ marginTop: "10px" }}
+          >
+            Analize your text
+          </Button>
+
+          <Button
+            onClick={() => {
+              getTagsFromText();
+            }}
+            style={{ marginTop: "10px" }}
+          >
+            Generate tags
+          </Button>
         </div>
-        <Card className="card" shadow="xs">
+
+        {sentimentObj && <Card className="card" shadow="xs">
           <Card.Section
             className="section"
-            style={{ flexDirection: "column", display: "flex" }}
+            style={{ flexDirection: "column", display: "flex", justifyContent: "space-between", width: "100%" }}
           >
-            <Button
-              onClick={() => {
-                analyzeSentiment();
-                checkTextWriting();
-                getTagsFromText();
+
+
+            <Center
+              style={{
+                width: "100%",
+                display: "flex",
+                flexDirection: "column",
               }}
             >
-              Analize your text
-            </Button>
-            {sentimentObj && (
-              <Center
-                style={{
-                  width: "100%",
-                  display: "flex",
-                  flexDirection: "column",
-                }}
-              >
-                <div>
-                  {sentimentObj.score > 6 && <BiHappyHeartEyes size="90" />}
-                  {sentimentObj.score > 0 && sentimentObj.score <= 6 && (
-                    <BiHappyAlt size="90" />
-                  )}
-                  {sentimentObj.score === 0 && <BiMeh size="90" />}
-                  {sentimentObj.score < 0 && sentimentObj.score >= -6 && (
-                    <BiSad size="90" />
-                  )}
-                  {sentimentObj.score < -6 && <BiAngry size="90" />}
-                </div>
-                <div>
-                  <span>Words you might want to avoid: </span>
+              <div>
+                {sentimentObj.score > 6 && <BiHappyHeartEyes size="90" />}
+                {sentimentObj.score > 0 && sentimentObj.score <= 6 && (
+                  <BiHappyAlt size="90" />
+                )}
+                {sentimentObj.score === 0 && <BiMeh size="90" />}
+                {sentimentObj.score < 0 && sentimentObj.score >= -6 && (
+                  <BiSad size="90" />
+                )}
+                {sentimentObj.score < -6 && <BiAngry size="90" />}
+              </div>
+              <div style={{ display: "flex", flexDirection: "row", justifyContent: "space-around", width: "100%", marginTop: "10px" }}>
+                <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
+                  <h4> <FiFlag fill="red" /> Red flags </h4>
                   {sentimentObj.badWords.length === 0 && "None"}
                   {sentimentObj.badWords.map((elem, index) => (
                     <span>
@@ -194,8 +211,8 @@ const RecPage = () => {
                     </span>
                   ))}
                 </div>
-                <div>
-                  <span>Words you might want to keep: </span>
+                <div style={{ display: "flex", flexDirection: "column" }}>
+                  <h4> <FiFlag fill="green" /> Green flags </h4>
                   {sentimentObj.goodWords.length === 0 && "None"}
                   {sentimentObj.goodWords.map((elem, index) => (
                     <span>
@@ -203,13 +220,18 @@ const RecPage = () => {
                       {index === sentimentObj.goodWords.length - 1 ? "." : ","}
                     </span>
                   ))}
+
                 </div>
-              </Center>
-            )}
+              </div>
+              
+            </Center>
+            <span style={{alignSelf:"center"}}>{readable} readability!</span>
+
           </Card.Section>
         </Card>
+        }
       </div>
-      <TagChart />
+      <TagChart data={recommendedTags} />
     </div>
   );
 };

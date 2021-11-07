@@ -72,6 +72,7 @@ const RecPage = () => {
   const [sentimentObj, setSentimentObj] = React.useState(null);
   const [trends, setTrends] = React.useState([]);
   const [recommendedTags, setRecommendedTags] = React.useState([]);
+  const [tagsFromNet, setTagsFromNet] = React.useState([]);
 
   const analyzeSentiment = () => {
     const sentiment = new Sentiment();
@@ -82,16 +83,16 @@ const RecPage = () => {
       goodWords: [...new Set(result.positive)],
     });
   };
-    const [readable, setReadable] = useState(null);
+  const [readable, setReadable] = useState(null);
 
   React.useEffect(() => {
     axios.get(MAIN_URL + "trendy").then((response) => setTrends(response.data));
   }, []);
 
   const checkTextWriting = () => {
-    axios
-      .post(MAIN_URL + "gob", { data: postText })
-      .then((result) => { setReadable(result.data)});
+    axios.post(MAIN_URL + "gob", { data: postText }).then((result) => {
+      setReadable(result.data);
+    });
   };
 
   const getTagsFromText = () => {
@@ -99,10 +100,13 @@ const RecPage = () => {
       .post(MAIN_URL + "tags", { data: postText + " " + tagsText })
       .then((result) =>
         setRecommendedTags(result.data.filter((elem) => !addon.includes(elem)))
-      )
-      .then( 
-        axios.post(MAIN_URL+ "more_tags", { data: postText + " " + tagsText })
-        .then((result) => setRecommendedTags(result.data.filter( elem => !addon.includes(elem)))));
+      );
+
+    axios
+      .post(MAIN_URL + "more_tags", { data: postText + " " + tagsText })
+      .then((result) =>
+        setTagsFromNet(result.data.filter((elem) => !addon.includes(elem)))
+      );
   };
 
   return (
@@ -175,63 +179,93 @@ const RecPage = () => {
           </Button>
         </div>
 
-        {sentimentObj && <Card className="card" shadow="xs">
-          <Card.Section
-            className="section"
-            style={{ flexDirection: "column", display: "flex", justifyContent: "space-between", width: "100%" }}
-          >
-
-
-            <Center
+        {sentimentObj && (
+          <Card className="card" shadow="xs">
+            <Card.Section
+              className="section"
               style={{
-                width: "100%",
-                display: "flex",
                 flexDirection: "column",
+                display: "flex",
+                justifyContent: "space-between",
+                width: "100%",
               }}
             >
-              <div>
-                {sentimentObj.score > 6 && <BiHappyHeartEyes size="90" />}
-                {sentimentObj.score > 0 && sentimentObj.score <= 6 && (
-                  <BiHappyAlt size="90" />
-                )}
-                {sentimentObj.score === 0 && <BiMeh size="90" />}
-                {sentimentObj.score < 0 && sentimentObj.score >= -6 && (
-                  <BiSad size="90" />
-                )}
-                {sentimentObj.score < -6 && <BiAngry size="90" />}
-              </div>
-              <div style={{ display: "flex", flexDirection: "row", justifyContent: "space-around", width: "100%", marginTop: "10px" }}>
-                <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
-                  <h4> <FiFlag fill="red" /> Red flags </h4>
-                  {sentimentObj.badWords.length === 0 && "None"}
-                  {sentimentObj.badWords.map((elem, index) => (
-                    <span>
-                      {elem}
-                      {index === sentimentObj.badWords.length - 1 ? "." : ","}
-                    </span>
-                  ))}
+              <Center
+                style={{
+                  width: "100%",
+                  display: "flex",
+                  flexDirection: "column",
+                }}
+              >
+                <div>
+                  {sentimentObj.score > 6 && <BiHappyHeartEyes size="90" />}
+                  {sentimentObj.score > 0 && sentimentObj.score <= 6 && (
+                    <BiHappyAlt size="90" />
+                  )}
+                  {sentimentObj.score === 0 && <BiMeh size="90" />}
+                  {sentimentObj.score < 0 && sentimentObj.score >= -6 && (
+                    <BiSad size="90" />
+                  )}
+                  {sentimentObj.score < -6 && <BiAngry size="90" />}
                 </div>
-                <div style={{ display: "flex", flexDirection: "column" }}>
-                  <h4> <FiFlag fill="green" /> Green flags </h4>
-                  {sentimentObj.goodWords.length === 0 && "None"}
-                  {sentimentObj.goodWords.map((elem, index) => (
-                    <span>
-                      {elem}
-                      {index === sentimentObj.goodWords.length - 1 ? "." : ","}
-                    </span>
-                  ))}
-
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "row",
+                    justifyContent: "space-around",
+                    width: "100%",
+                    marginTop: "10px",
+                  }}
+                >
+                  <div
+                    style={{
+                      display: "flex",
+                      flexDirection: "column",
+                      alignItems: "center",
+                    }}
+                  >
+                    <h4>
+                      {" "}
+                      <FiFlag fill="red" /> Red flags{" "}
+                    </h4>
+                    {sentimentObj.badWords.length === 0 && "None"}
+                    {sentimentObj.badWords.map((elem, index) => (
+                      <span>
+                        {elem}
+                        {index === sentimentObj.badWords.length - 1 ? "." : ","}
+                      </span>
+                    ))}
+                  </div>
+                  <div style={{ display: "flex", flexDirection: "column" }}>
+                    <h4>
+                      {" "}
+                      <FiFlag fill="green" /> Green flags{" "}
+                    </h4>
+                    {sentimentObj.goodWords.length === 0 && "None"}
+                    {sentimentObj.goodWords.map((elem, index) => (
+                      <span>
+                        {elem}
+                        {index === sentimentObj.goodWords.length - 1
+                          ? "."
+                          : ","}
+                      </span>
+                    ))}
+                  </div>
                 </div>
-              </div>
-              
-            </Center>
-            <span style={{alignSelf:"center"}}>{readable} readability!</span>
-
-          </Card.Section>
-        </Card>
-        }
+              </Center>
+              <span style={{ alignSelf: "center" }}>
+                {readable} readability!
+              </span>
+            </Card.Section>
+          </Card>
+        )}
       </div>
-      <TagChart data={recommendedTags} />
+      {recommendedTags.length !== 0 && tagsFromNet.length !== 0 && (  
+        <>
+          <TagChart data={recommendedTags} />
+          <TagChart data={tagsFromNet} />
+        </>
+      )}
     </div>
   );
 };
